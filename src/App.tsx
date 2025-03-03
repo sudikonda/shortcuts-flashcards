@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import confetti from 'canvas-confetti';
 import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyboard } from 'lucide-react';
 
 // Define the structure for our flashcards
@@ -210,6 +211,33 @@ function App() {
     
     if (correct) {
       // If correct, mark as known and move to next card after a delay
+      const button = document.querySelector('#check-button');
+      if (button) {
+        const rect = button.getBoundingClientRect();
+        const duration = 1 * 1000;
+        const end = Date.now() + duration;
+
+        (function frame() {
+          // launch a few confetti and then recurse
+          confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 55,
+            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }
+          });
+          confetti({
+            particleCount: 7,
+            angle: 120,
+            spread: 55,
+            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }
+          });
+
+          // keep going until we are out of time
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        }());
+      }
       if (!isCardKnown(currentCard.id)) {
         setKnownCards([...knownCards, currentCard.id]);
       }
@@ -308,6 +336,7 @@ function App() {
                           autoFocus
                         />
                         <button
+                          id="check-button"
                           onClick={checkAnswer}
                           className="ml-2 bg-blue-600 text-white px-4 py-3 rounded-md hover:bg-blue-700 transition"
                         >
