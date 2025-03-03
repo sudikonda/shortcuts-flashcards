@@ -450,6 +450,7 @@ function App() {
       <div className="mt-12 text-sm text-gray-500">
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
+      <footer className="footer">sudikonda</footer>
     </div>
   );
 }
