@@ -376,24 +376,24 @@ function App() {
                     {showAnswer && (
                       <p className="text-gray-600 text-center italic">"{currentCard.description}"</p>
                     )}
-                    <p className="text-gray-500 text-sm mt-4">Click to flip</p>
+                    <p className="text-gray-500 text-sm mt-4 flip-back-text">Click to flip</p>
                   </>
                 )}
               </div>
               
               {/* Back of card */}
               <div 
-                className={`absolute w-full h-full bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center items-center backface-hidden rotate-y-180 ${!flipped ? 'hidden' : ''}`}
+                className={`relative w-full bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center items-center backface-hidden rotate-y-180 ${!flipped ? 'hidden' : ''}`}
                 onClick={handleFlip}
               >
                 <div className="absolute top-4 left-4 px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-md">
                   {currentCard.category}
                 </div>
                 <p className="text-xl text-center">{currentCard.description}</p>
-                <div className="mt-4 text-gray-600 font-mono bg-gray-100 px-3 py-1 rounded">
+                <div className="mt-4 mb-1 text-gray-600 font-mono bg-gray-100 px-3 py-1 rounded">
                   {currentCard.command}
                 </div>
-                <p className="text-gray-500 text-sm mt-4">Click to flip back</p>
+                <p className="text-gray-500 text-sm flip-back-text">Click to flip back</p>
               </div>
             </div>
           </div>
