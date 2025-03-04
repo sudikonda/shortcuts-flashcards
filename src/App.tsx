@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyboard } from 'lucide-react';
-import vimCommands from './vimCommands';
+import { vimCommands } from './vimCommands';
+import { raycastCommands } from './raycastCommands';
 
 // Define the structure for our flashcards
 export interface Flashcard {
@@ -23,19 +24,25 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
+  const [selectedCommandSet, setSelectedCommandSet] = useState<'vim' | 'raycast'>('vim');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Initialize flashcards from the .vimrc file
+  // Initialize flashcards based on selected command set
   useEffect(() => {
-    setFlashcards(vimCommands);
+    const commands = selectedCommandSet === 'vim' ? vimCommands : raycastCommands;
+    setFlashcards(commands);
 
     // Extract unique categories
-    const uniqueCategories = Array.from(new Set(vimCommands.map(card => card.category)));
+    const uniqueCategories = Array.from(new Set(commands.map(card => card.category)));
     setCategories(uniqueCategories);
 
     // Initialize filtered cards with all cards
-    setFilteredCards(vimCommands);
-  }, []);
+    setFilteredCards(commands);
+    setCurrentCardIndex(0);
+    setFlipped(false);
+    setUserInput('');
+    setIsCorrect(null);
+  }, [selectedCommandSet]);
 
   // Filter cards when category changes
   useEffect(() => {
@@ -95,6 +102,10 @@ function App() {
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
+  };
+
+  const handleCommandSetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCommandSet(e.target.value as 'vim' | 'raycast');
   };
 
   const handleKnown = () => {
@@ -199,25 +210,40 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4">
       <h1 className="text-3xl font-bold text-gray-800 mb-2 flex items-center">
-        <img src="/Ideavim-shortcuts-flashcards/public/app-icon.png" alt="App Logo" className="mr-2 h-8 w-8" />
-        Vim Shortcuts Flashcards
+        <img src="/Ideavim-shortcuts-flashcards/app-icon.png" alt="App Logo" className="mr-2 h-8 w-8" />
+        Command Shortcuts Flashcards
       </h1>
-      <p className="text-gray-600 mb-8">Master your Vim commands with these flashcards</p>
+      <p className="text-gray-600 mb-8">Master your keyboard shortcuts with these flashcards</p>
 
       <div className="w-full max-w-3xl mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div className="flex items-center">
-          <label htmlFor="category" className="mr-2 text-gray-700">Category:</label>
-          <select
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="All">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center">
+            <label htmlFor="commandSet" className="mr-2 text-gray-700">Command Set:</label>
+            <select
+              id="commandSet"
+              value={selectedCommandSet}
+              onChange={handleCommandSetChange}
+              className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="vim">Vim Commands</option>
+              <option value="raycast">Raycast Commands</option>
+            </select>
+          </div>
+
+          <div className="flex items-center">
+            <label htmlFor="category" className="mr-2 text-gray-700">Category:</label>
+            <select
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="All">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="flex gap-2 flex-wrap justify-center">
@@ -307,7 +333,11 @@ function App() {
                       )}
 
                       <div className="text-sm text-gray-500 mt-2">
-                        <p>Tip: For leader key, you can type "space" or " " (a space)</p>
+                        {selectedCommandSet === 'vim' ? (
+                          <p>Tip: For leader key, you can type "space" or " " (a space)</p>
+                        ) : (
+                          <p>Tip: Type the exact shortcut keys shown (e.g., "op" for Postman)</p>
+                        )}
                       </div>
                     </div>
                   </div>

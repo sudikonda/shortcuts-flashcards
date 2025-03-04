@@ -58,8 +58,6 @@ const vimCommands: Flashcard[] = [
   { id: 34, category: "Other", command: "<leader>i", description: "Toggle case and start typing" },
   { id: 35, category: "Other", command: "v2l<leader>u", description: "Remove selection and toggle case" },
   { id: 36, category: "Other", command: "U", description: "Redo (remapped from Ctrl+R)" },
-  
 ];
- 
 
- export default vimCommands;
+export { vimCommands };
