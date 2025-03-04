@@ -2,18 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for card flipping */
-.perspective-1000 {
-  perspective: 1000px;
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #9333ea;
+  --secondary-hover: #7e22ce;
+  --success: #22c55e;
+  --success-hover: #16a34a;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --neutral: #4b5563;
+  --neutral-hover: #374151;
 }
 
-.flip-back-text {
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #555;
-  font-size: 0.8em;
+body {
+  @apply bg-gray-50;
+}
+
+/* Card Flipping */
+.perspective-1000 {
+  perspective: 1000px;
 }
 
 .transform-style-preserve-3d {
@@ -28,6 +36,67 @@
   transform: rotateY(180deg);
 }
 
+/* Custom Components */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary-hover;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white hover:bg-secondary-hover;
+}
+
+.btn-success {
+  @apply bg-success text-white hover:bg-success-hover;
+}
+
+.btn-danger {
+  @apply bg-danger text-white hover:bg-danger-hover;
+}
+
+.btn-neutral {
+  @apply bg-neutral text-white hover:bg-neutral-hover;
+}
+
+.btn-outline {
+  @apply border-2 bg-white hover:bg-gray-50;
+}
+
+.select-container {
+  @apply relative;
+}
+
+.select {
+  @apply w-full px-4 py-2 bg-white border border-gray-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+}
+
+.select-icon {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-lg p-8 transition-all duration-200;
+}
+
+.card-header {
+  @apply absolute top-4 left-4 px-3 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full;
+}
+
+.input {
+  @apply w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono text-lg transition-all duration-200;
+}
+
+.input-success {
+  @apply border-success bg-green-50;
+}
+
+.input-error {
+  @apply border-danger bg-red-50;
+}
+
 .footer {
   position: fixed;
   left: 0;
@@ -35,8 +104,19 @@
   width: 100%;
   background: linear-gradient(to right, #00c6ff, #007bff);
   color: white;
-  text-align: right;
+  text-align: center;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
 }
