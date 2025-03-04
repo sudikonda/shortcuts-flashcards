@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyboard, ChevronDown, Command } from 'lucide-react';
 import { ideaVimCommands } from './ideaVimCommands';
 import { leaderKeyCommands } from './leaderKeyCommands';
+import { vimCommands } from './vimCommands';
 
 export interface Flashcard {
   id: number;
@@ -23,11 +24,24 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
-  const [selectedCommandSet, setSelectedCommandSet] = useState<'idea' | 'leader'>('idea');
+  const [selectedCommandSet, setSelectedCommandSet] = useState<'idea' | 'leader' | 'vim'>('idea');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const commands = selectedCommandSet === 'idea' ? ideaVimCommands : leaderKeyCommands;
+    let commands: Flashcard[];
+    switch (selectedCommandSet) {
+      case 'idea':
+        commands = ideaVimCommands;
+        break;
+      case 'leader':
+        commands = leaderKeyCommands;
+        break;
+      case 'vim':
+        commands = vimCommands;
+        break;
+      default:
+        commands = ideaVimCommands;
+    }
     setFlashcards(commands);
     const uniqueCategories = Array.from(new Set(commands.map(card => card.category)));
     setCategories(uniqueCategories);
@@ -212,6 +226,7 @@ function App() {
               >
                 <option value="idea">IdeaVim Commands</option>
                 <option value="leader">LeaderKey Commands</option>
+                <option value="vim">Vim Commands</option>
               </select>
               <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
             </div>
@@ -304,8 +319,10 @@ function App() {
                         <div className="text-sm text-gray-500">
                           {selectedCommandSet === 'idea' ? (
                             <p>Tip: For leader key, you can type "space" or " " (a space)</p>
-                          ) : (
+                          ) : selectedCommandSet === 'leader' ? (
                             <p>Tip: Type the exact shortcut keys shown (e.g., "op" for Postman)</p>
+                          ) : (
+                            <p>Tip: Type the exact vim command (e.g., "i" for insert)</p>
                           )}
                         </div>
                       </div>
