@@ -1,13 +1,15 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "shortcuts-flashcards",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://sudikonda.github.io/shortcuts-flashcards",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.2",
