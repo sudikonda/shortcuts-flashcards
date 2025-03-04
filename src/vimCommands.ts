@@ -19,7 +19,7 @@ const vimCommands: Flashcard[] = [
   { id: 9, category: "Code", command: "<leader>z", description: "Toggle distraction free mode" },
   { id: 10, category: "Code", command: "<leader>oi", description: "Optimize imports" },
   { id: 11, category: "Code", command: "<leader>rf", description: "Reformat code" },
-  { id: 12, category: "Code", command: "<leader>o", description: "File structure popup" },
+  { id: 12, category: "Code", command: "<leader>fs", description: "File structure popup" },
   
   // Project
   { id: 13, category: "Project", command: "<leader>pv", description: "Select in project view" },
@@ -34,7 +34,7 @@ const vimCommands: Flashcard[] = [
   { id: 18, category: "Search", command: "<leader>sa", description: "Go to action" },
   { id: 19, category: "Search", command: "<leader>sf", description: "Go to file" },
   { id: 20, category: "Search", command: "<leader>gd", description: "Go to declaration" },
-  { id: 21, category: "Search", command: "<S-Space>", description: "Go to next error" },
+  { id: 21, category: "Search", command: "<leader>ge", description: "Go to next error" },
   
   // Window
   { id: 22, category: "Window", command: "<leader>hw", description: "Hide active window" },
@@ -47,11 +47,11 @@ const vimCommands: Flashcard[] = [
   // Navigation
   { id: 28, category: "Navigation", command: "<leader><<", description: "Navigate back" },
   { id: 29, category: "Navigation", command: "<leader>>>", description: "Navigate forward" },
-  { id: 30, category: "Navigation", command: "<leader>tab", description: "Recent files" },
+  { id: 30, category: "Navigation", command: "<leader>r", description: "Recent files" },
   
   // Terminal
   { id: 31, category: "Terminal", command: "<leader>t", description: "Activate terminal tool window" },
-  { id: 32, category: "Terminal", command: "gc", description: "Activate GitHub Copilot chat tool window" },
+  { id: 32, category: "Terminal", command: "<leader>gc", description: "Activate GitHub Copilot chat tool window" },
   
   // Other
   { id: 33, category: "Other", command: "H", description: "Move cursor left (remapped from h)" },
@@ -59,8 +59,6 @@ const vimCommands: Flashcard[] = [
   { id: 35, category: "Other", command: "v2l<leader>u", description: "Remove selection and toggle case" },
   { id: 36, category: "Other", command: "U", description: "Redo (remapped from Ctrl+R)" },
   
-  // Plugins
-  { id: 37, category: "Plugins", command: "<C-n>", description: "Select next occurrence (multiple cursors)" },
 ];
  
 
