@@ -28,11 +28,11 @@ function App() {
   // Initialize flashcards from the .vimrc file
   useEffect(() => {
     setFlashcards(vimCommands);
-    
+
     // Extract unique categories
     const uniqueCategories = Array.from(new Set(vimCommands.map(card => card.category)));
     setCategories(uniqueCategories);
-    
+
     // Initialize filtered cards with all cards
     setFilteredCards(vimCommands);
   }, []);
@@ -130,23 +130,23 @@ function App() {
 
   const checkAnswer = () => {
     if (!currentCard) return;
-    
+
     // Normalize input and expected answer for comparison
     const normalizedInput = userInput.trim().toLowerCase();
     const normalizedCommand = currentCard.command.toLowerCase();
-    
+
     // Handle special cases for leader key
     const processedInput = normalizedInput.replace(/space/g, ' ').replace(/leader/g, '<leader>');
     const processedCommand = normalizedCommand.replace(/<leader>/g, ' ');
-    
+
     // Check if the answer is correct
-    const correct = 
-      processedInput === processedCommand || 
+    const correct =
+      processedInput === processedCommand ||
       normalizedInput === normalizedCommand ||
       processedInput.replace(/ /g, '') === processedCommand.replace(/<leader>/g, '').replace(/ /g, '');
-    
+
     setIsCorrect(correct);
-    
+
     if (correct) {
       // If correct, mark as known and move to next card after a delay
       const button = document.querySelector('#check-button');
@@ -198,15 +198,18 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4">
-      <h1 className="text-3xl font-bold text-gray-800 mb-2">Vim Shortcuts Flashcards</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-2 flex items-center">
+        <img src="/Ideavim-shortcuts-flashcards/public/app-icon.png" alt="App Logo" className="mr-2 h-8 w-8" />
+        Vim Shortcuts Flashcards
+      </h1>
       <p className="text-gray-600 mb-8">Master your Vim commands with these flashcards</p>
-      
+
       <div className="w-full max-w-3xl mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center">
           <label htmlFor="category" className="mr-2 text-gray-700">Category:</label>
-          <select 
-            id="category" 
-            value={selectedCategory} 
+          <select
+            id="category"
+            value={selectedCategory}
             onChange={handleCategoryChange}
             className="bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
@@ -216,51 +219,51 @@ function App() {
             ))}
           </select>
         </div>
-        
+
         <div className="flex gap-2 flex-wrap justify-center">
-          <button 
-            onClick={handleShuffle} 
+          <button
+            onClick={handleShuffle}
             className="flex items-center bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition"
           >
             <Shuffle size={18} className="mr-1" /> Shuffle
           </button>
-          <button 
-            onClick={toggleShowAnswers} 
+          <button
+            onClick={toggleShowAnswers}
             className="flex items-center bg-purple-600 text-white px-3 py-2 rounded-md hover:bg-purple-700 transition"
           >
             <BookOpen size={18} className="mr-1" /> {showAnswer ? "Hide Answers" : "Show Answers"}
           </button>
-          <button 
-            onClick={togglePracticeMode} 
+          <button
+            onClick={togglePracticeMode}
             className="flex items-center bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition"
           >
             <Keyboard size={18} className="mr-1" /> {practiceMode ? "View Mode" : "Practice Mode"}
           </button>
         </div>
       </div>
-      
+
       {filteredCards.length > 0 && currentCard ? (
         <>
-          <div 
+          <div
             className={`w-full max-w-2xl perspective-1000 mb-6 ${isCardKnown(currentCard.id) ? 'border-green-500 border-2 rounded-xl' : ''}`}
           >
             <div className={`relative w-full transition-transform duration-500 transform-style-preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
               {/* Front of card */}
-              <div 
+              <div
                 className={`w-full bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center items-center backface-hidden ${flipped ? 'hidden' : ''}`}
                 onClick={handleFlip}
               >
                 <div className="absolute top-4 left-4 px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-md">
                   {currentCard.category}
                 </div>
-                
+
                 {practiceMode ? (
                   <div className="w-full flex flex-col items-center">
                     <h2 className="text-2xl font-bold text-center mb-6">What is the shortcut for:</h2>
                     <div className="bg-indigo-50 p-4 rounded-lg mb-6 w-full text-center">
                       <p className="text-xl text-indigo-800">{currentCard.description}</p>
                     </div>
-                    
+
                     <div className="w-full max-w-md">
                       <div className="flex items-center mb-4">
                         <input
@@ -281,7 +284,7 @@ function App() {
                           Check
                         </button>
                       </div>
-                      
+
                       {isCorrect !== null && (
                         <div className={`p-3 rounded-md mb-4 ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                           {isCorrect ? (
@@ -302,7 +305,7 @@ function App() {
                           )}
                         </div>
                       )}
-                      
+
                       <div className="text-sm text-gray-500 mt-2">
                         <p>Tip: For leader key, you can type "space" or " " (a space)</p>
                       </div>
@@ -318,9 +321,9 @@ function App() {
                   </>
                 )}
               </div>
-              
+
               {/* Back of card */}
-              <div 
+              <div
                 className={`relative w-full bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center items-center backface-hidden rotate-y-180 ${!flipped ? 'hidden' : ''}`}
                 onClick={handleFlip}
               >
@@ -335,44 +338,44 @@ function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="w-full max-w-2xl flex justify-between items-center mb-8">
-            <button 
-              onClick={handlePrevious} 
+            <button
+              onClick={handlePrevious}
               disabled={currentCardIndex === 0}
               className={`flex items-center px-4 py-2 rounded-md ${currentCardIndex === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
             >
               <ChevronLeft size={20} className="mr-1" /> Previous
             </button>
-            
+
             <span className="text-gray-600">
               {currentCardIndex + 1} of {filteredCards.length}
             </span>
-            
-            <button 
-              onClick={handleNext} 
+
+            <button
+              onClick={handleNext}
               disabled={currentCardIndex === filteredCards.length - 1}
               className={`flex items-center px-4 py-2 rounded-md ${currentCardIndex === filteredCards.length - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
             >
               Next <ChevronRight size={20} className="ml-1" />
             </button>
           </div>
-          
+
           <div className="flex gap-4 flex-wrap justify-center">
-            <button 
-              onClick={handleKnown} 
+            <button
+              onClick={handleKnown}
               className="flex items-center bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
             >
               <Check size={20} className="mr-2" /> I know this
             </button>
-            <button 
-              onClick={handleUnknown} 
+            <button
+              onClick={handleUnknown}
               className="flex items-center bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
             >
               <X size={20} className="mr-2" /> Still learning
             </button>
-            <button 
-              onClick={() => setKnownCards([])} 
+            <button
+              onClick={() => setKnownCards([])}
               className="flex items-center bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
             >
               <RotateCcw size={20} className="mr-2" /> Reset progress
@@ -384,7 +387,7 @@ function App() {
           No flashcards available for this category.
         </div>
       )}
-      
+
       <div className="mt-12 text-sm text-gray-500">
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
