@@ -1,6 +1,6 @@
 import { Flashcard } from './App';
 
-const raycastCommands: Flashcard[] = [
+const leaderKeyCommands: Flashcard[] = [
   // Basic Applications
   { id: 1, category: "Basic", command: "t", description: "Open Terminal" },
   { id: 2, category: "Basic", command: "i", description: "Open IntelliJ IDEA" },
@@ -48,4 +48,4 @@ const raycastCommands: Flashcard[] = [
   { id: 34, category: "Window", command: "wc", description: "Center Window (50% size)" }
 ];
 
-export { raycastCommands };
+export { leaderKeyCommands };

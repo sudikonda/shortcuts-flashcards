@@ -1,6 +1,6 @@
 import { Flashcard } from './App';
 
-const vimCommands: Flashcard[] = [
+const ideaVimCommands: Flashcard[] = [
   // Leader key
   { id: 1, category: "Basic", command: "Space", description: "Leader key" },
   
@@ -60,4 +60,4 @@ const vimCommands: Flashcard[] = [
   { id: 36, category: "Other", command: "U", description: "Redo (remapped from Ctrl+R)" },
 ];
 
-export { vimCommands };
+export { ideaVimCommands };
