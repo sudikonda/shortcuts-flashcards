@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import CategorySelector from './components/CategorySelector';
+import FlashcardDisplay from './components/FlashcardDisplay';
+import ProgressControls from './components/ProgressControls';
 import confetti from 'canvas-confetti';
 import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyboard, ChevronDown, Command } from 'lucide-react';
 import { ideaVimCommands } from './ideaVimCommands';
@@ -13,7 +16,7 @@ export interface Flashcard {
   parent: string;
   category: string;
   command: string;
-  description: string; 
+  description: string;
 }
 
 function App() {
@@ -226,38 +229,13 @@ function App() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8">
-          <div className="flex items-center gap-6 w-full sm:w-auto">
-            <div className="select-container w-full sm:w-48">
-              <select
-                id="commandSet"
-                value={selectedCommandSet}
-                onChange={handleCommandSetChange}
-                className="select"
-              >
-                <option value="all">All Commands</option>
-                <option value="idea">IdeaVim Commands</option>
-                <option value="leader">LeaderKey Commands</option>
-                <option value="vim">Vim Commands</option>
-                <option value="vimium">Vimium Commands</option>
-              </select>
-              <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
-            </div>
-
-            <div className="select-container w-full sm:w-48">
-              <select
-                id="category"
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                className="select"
-              >
-                <option value="All">All Categories</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
-              <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
-            </div>
-          </div>
+          <CategorySelector
+            selectedCommandSet={selectedCommandSet}
+            selectedCategory={selectedCategory}
+            categories={categories}
+            handleCommandSetChange={handleCommandSetChange}
+            handleCategoryChange={handleCategoryChange}
+          />
 
           <div className="flex gap-3 w-full sm:w-auto">
             <button onClick={handleShuffle} className="btn btn-primary flex-1 sm:flex-none">
@@ -273,146 +251,52 @@ function App() {
         </div>
 
         {filteredCards.length > 0 && currentCard ? (
-          <div className="animate-fadeIn">
-            <div className={`perspective-1000 mb-8 ${isCardKnown(currentCard.id) ? 'ring-2 ring-success rounded-2xl' : ''}`}>
-              <div className={`relative transition-transform duration-500 transform-style-preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
-                <div className={`card ${flipped ? 'hidden' : ''}`} onClick={handleFlip}>
-                  <div className="card-header">{currentCard.parent}</div>
-                  <div className="card-subheading">{currentCard.category}</div>
-
-                  {practiceMode ? (
-                    <div className="flex flex-col items-center">
-                      <h2 className="text-2xl font-bold text-center mb-6">What is the shortcut for:</h2>
-                      <div className="bg-indigo-50 p-6 rounded-xl mb-8 w-full">
-                        <p className="text-xl text-indigo-900 text-center">{currentCard.description}</p>
-                      </div>
-
-                      <div className="w-full max-w-lg">
-                        <div className="flex items-center gap-3 mb-4">
-                          <input
-                            ref={inputRef}
-                            type="text"
-                            value={userInput}
-                            onChange={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                            placeholder="Type the shortcut..."
-                            className={`input ${getInputFeedbackClass()}`}
-                            autoFocus
-                          />
-                          <button
-                            id="check-button"
-                            onClick={checkAnswer}
-                            className="btn btn-primary whitespace-nowrap"
-                          >
-                            Check
-                          </button>
-                        </div>
-
-                        {isCorrect !== null && (
-                          <div className={`p-4 rounded-xl mb-4 ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
-                            {isCorrect ? (
-                              <p className="flex items-center text-success">
-                                <Check size={18} className="mr-2" /> Correct! Well done.
-                              </p>
-                            ) : (
-                              <div>
-                                <p className="flex items-center text-danger mb-2">
-                                  <X size={18} className="mr-2" /> Not quite right. Try again or see the answer.
-                                </p>
-                                {showAnswer && (
-                                  <p className="font-mono bg-white px-3 py-2 rounded-lg">
-                                    Answer: {currentCard.command}
-                                  </p>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        )}
-
-                        <div className="text-sm text-gray-500">
-                          {selectedCommandSet === 'idea' ? (
-                            <p>Tip: For leader key, you can type "space" or " " (a space)</p>
-                          ) : selectedCommandSet === 'leader' ? (
-                            <p>Tip: Type the exact shortcut keys shown (e.g., "op" for Postman)</p>
-                          ) : selectedCommandSet === 'vimium' ? (
-                            <p>Tip: Type exact shortcut keys for command (e.g., "j" for Scroll down)</p>
-                          ) : (
-                            <p>Tip: Type the exact vim command (e.g., "i" for insert)</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-center">
-                      <h2 className="text-2xl font-bold mb-4">{currentCard.command}</h2>
-                      {showAnswer && (
-                        <p className="text-gray-600 italic">"{currentCard.description}"</p>
-                      )}
-                      <p className="text-gray-500 text-sm mt-4">Click to flip</p>
-                    </div>
-                  )}
-                </div>
-
-                <div className={`card relative w-full inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
-                  <div className="card-header">{currentCard.category}</div>
-                  <div className="card-subheading">{currentCard.parent}</div>
-                  <div className="text-center">
-                    <p className="text-xl mb-4">{currentCard.description}</p>
-                    <div className="inline-block font-mono bg-gray-100 px-4 py-2 rounded-lg">
-                      {currentCard.command}
-                    </div>
-                    <p className="text-gray-500 text-sm mt-4 flip-back-text">Click to flip back</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center mb-8">
-              <button
-                onClick={handlePrevious}
-                disabled={currentCardIndex === 0}
-                className={`btn ${currentCardIndex === 0 ? 'bg-gray-200 cursor-not-allowed' : 'btn-outline border-gray-200 text-gray-700'}`}
-              >
-                <ChevronLeft size={20} /> Previous
-              </button>
-
-              <span className="text-gray-600 font-medium">
-                {currentCardIndex + 1} of {filteredCards.length}
-              </span>
-
-              <button
-                onClick={handleNext}
-                disabled={currentCardIndex === filteredCards.length - 1}
-                className={`btn ${currentCardIndex === filteredCards.length - 1 ? 'bg-gray-200 cursor-not-allowed' : 'btn-outline border-gray-200 text-gray-700'}`}
-              >
-                Next <ChevronRight size={20} />
-              </button>
-            </div>
-
-            <div className="flex gap-4 justify-center">
-              <button onClick={handleKnown} className="btn btn-success">
-                <Check size={20} /> I know this
-              </button>
-              <button onClick={handleUnknown} className="btn btn-danger">
-                <X size={20} /> Still learning
-              </button>
-              <button onClick={() => setKnownCards([])} className="btn btn-neutral">
-                <RotateCcw size={20} /> Reset progress
-              </button>
-            </div>
-          </div>
+          <FlashcardDisplay
+            currentCard={currentCard}
+            flipped={flipped}
+            practiceMode={practiceMode}
+            showAnswer={showAnswer}
+            isCardKnown={isCardKnown}
+            userInput={userInput}
+            isCorrect={isCorrect}
+            selectedCommandSet={selectedCommandSet}
+            handleFlip={handleFlip}
+            handleInputChange={handleInputChange}
+            checkAnswer={checkAnswer}
+            handleKeyDown={handleKeyDown}
+            getInputFeedbackClass={getInputFeedbackClass}
+            inputRef={inputRef}
+          />
         ) : (
           <div className="text-center text-gray-600 py-12">
             No flashcards available for this category.
           </div>
         )}
 
+        <ProgressControls
+          currentCardIndex={currentCardIndex}
+          filteredCardsLength={filteredCards.length}
+          handlePrevious={handlePrevious}
+          handleNext={handleNext}
+        />
+
+        <div className="flex gap-4 justify-center">
+          <button onClick={handleKnown} className="btn btn-success">
+            <Check size={20} /> I know this
+          </button>
+          <button onClick={handleUnknown} className="btn btn-danger">
+            <X size={20} /> Still learning
+          </button>
+          <button onClick={() => setKnownCards([])} className="btn btn-neutral">
+            <RotateCcw size={20} /> Reset progress
+          </button>
+        </div>
+      </div>
+
       <div className="text-center mt-12 text-sm text-gray-500">
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
       <footer className="footer">sudikonda</footer>
-
-      </div>
     </div>
   );
 }
