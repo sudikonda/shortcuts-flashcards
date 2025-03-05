@@ -6,11 +6,14 @@ import { leaderKeyCommands } from './leaderKeyCommands';
 import { vimCommands } from './vimCommands';
 import { vimiumCommands } from './vimiumCommands';
 
+const allCommands = [...ideaVimCommands, ...leaderKeyCommands, ...vimCommands, ...vimiumCommands];
+
 export interface Flashcard {
   id: number;
   category: string;
   command: string;
   description: string;
+  parent: string;
 }
 
 function App() {
@@ -25,12 +28,15 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
-  const [selectedCommandSet, setSelectedCommandSet] = useState<'idea' | 'leader' | 'vim' | 'vimium'>('idea');
+  const [selectedCommandSet, setSelectedCommandSet] = useState<'all' | 'idea' | 'leader' | 'vim' | 'vimium'>('all');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let commands: Flashcard[];
     switch (selectedCommandSet) {
+      case 'all':
+        commands = allCommands;
+        break;
       case 'idea':
         commands = ideaVimCommands;
         break;
@@ -44,7 +50,7 @@ function App() {
         commands = vimiumCommands;
         break;
       default:
-        commands = ideaVimCommands;
+        commands = allCommands;
     }
     setFlashcards(commands);
     const uniqueCategories = Array.from(new Set(commands.map(card => card.category)));
@@ -228,6 +234,7 @@ function App() {
                 onChange={handleCommandSetChange}
                 className="select"
               >
+                <option value="all">All Commands</option>
                 <option value="idea">IdeaVim Commands</option>
                 <option value="leader">LeaderKey Commands</option>
                 <option value="vim">Vim Commands</option>
@@ -270,7 +277,8 @@ function App() {
             <div className={`perspective-1000 mb-8 ${isCardKnown(currentCard.id) ? 'ring-2 ring-success rounded-2xl' : ''}`}>
               <div className={`relative transition-transform duration-500 transform-style-preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
                 <div className={`card ${flipped ? 'hidden' : ''}`} onClick={handleFlip}>
-                  <div className="card-header">{currentCard.category}</div>
+                  <div className="card-header">{currentCard.parent}</div>
+                  <div className="card-subheading">{currentCard.category}</div>
 
                   {practiceMode ? (
                     <div className="flex flex-col items-center">

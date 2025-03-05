@@ -85,6 +85,10 @@ body {
   @apply absolute top-4 left-4 px-3 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full;
 }
 
+.card-subheading {
+  @apply absolute top-4 right-4 px-3 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full;
+}
+
 .input {
   @apply w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono text-lg transition-all duration-200;
 }
