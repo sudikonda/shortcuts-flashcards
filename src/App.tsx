@@ -3,7 +3,7 @@ import CategorySelector from './components/CategorySelector';
 import FlashcardDisplay from './components/FlashcardDisplay';
 import ProgressControls from './components/ProgressControls';
 import confetti from 'canvas-confetti';
-import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyboard, ChevronDown, Command } from 'lucide-react';
+import { Shuffle, RotateCcw, Check, X, BookOpen, Keyboard, Command } from 'lucide-react';
 import { ideaVimCommands } from './ideaVimCommands';
 import { leaderKeyCommands } from './leaderKeyCommands';
 import { vimCommands } from './vimCommands';

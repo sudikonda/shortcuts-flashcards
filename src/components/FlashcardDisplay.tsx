@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import confetti from 'canvas-confetti';
+import React from 'react';
 import { Check, X } from 'lucide-react';
 
 import { Flashcard } from '../App';
