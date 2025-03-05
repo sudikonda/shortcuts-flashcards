@@ -51,8 +51,8 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
             {practiceMode ? (
               <div className="flex flex-col items-center">
                 <h2 className="text-2xl font-bold text-center mb-6 dark:text-white">What is the shortcut for:</h2>
-                <div className="bg-indigo-50 p-6 rounded-xl mb-8 w-full">
-                  <p className="text-xl text-indigo-900 text-center">{currentCard.description}</p>
+                <div className="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-xl mb-8 w-full">
+                  <p className="text-xl dark:text-white text-indigo-900 text-center">{currentCard.description}</p>
                 </div>
 
                 <div className="w-full max-w-lg">
@@ -77,9 +77,9 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
                   </div>
 
                   {isCorrect !== null && (
-                    <div className={`p-4 rounded-xl mb-4 ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
+                    <div className={`p-4 rounded-xl mb-4 ${isCorrect ? 'bg-green-50 dark:bg-green-500' : 'bg-red-50 dark:bg-red-900'}`}>
                       {isCorrect ? (
-                        <p className="flex items-center text-success">
+                        <p className="flex items-center text-success-hover dark:text-white">
                           <Check size={18} className="mr-2" /> Correct! Well done.
                         </p>
                       ) : (
@@ -112,7 +112,7 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
               </div>
             ) : (
               <div className="text-center">
-                <h2 className="text-2xl font-bold mb-4">{currentCard.command}</h2>
+                <h2 className="text-2xl dark:text-white font-bold mb-4">{currentCard.command}</h2>
                 {showAnswer && (
                   <p className="text-gray-600 dark:text-gray-300 italic">"{currentCard.description}"</p>
                 )}
@@ -121,12 +121,12 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
             )}
           </div>
 
-          <div className={`card relative w-full inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
+          <div className={`card  bg-white dark:bg-gray-900 relative w-full inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
             <div className="card-header">{currentCard.category}</div>
             <div className="card-subheading">{currentCard.parent}</div>
             <div className="text-center">
-              <p className="text-xl mb-4">{currentCard.description}</p>
-              <div className="inline-block font-mono bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg">
+              <p className="text-xl mb-4 dark:text-gray-300">{currentCard.description}</p>
+              <div className="inline-block font-mono  dark:text-gray-300 px-4 py-2 rounded-lg">
                 {currentCard.command}
               </div>
               <p className="text-gray-500 dark:text-gray-400 text-sm mt-4 flip-back-text">Click to flip back</p>
