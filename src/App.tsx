@@ -23,6 +23,29 @@ function App() {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
   const [showAnswer, setShowAnswer] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -32,7 +55,24 @@ function App() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
   const [selectedCommandSet, setSelectedCommandSet] = useState<'all' | 'idea' | 'leader' | 'vim' | 'vimium'>('all');
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedPreference = localStorage.getItem('darkMode');
+    return savedPreference ? JSON.parse(savedPreference) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   useEffect(() => {
     let commands: Flashcard[];
@@ -218,14 +258,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-12 px-4">
       <div className="w-full max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3 flex items-center justify-center">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3 flex items-center justify-center">
             <Command className="w-10 h-10 mr-3 text-primary" />
             Command Shortcuts Flashcards
           </h1>
-          <p className="text-lg text-gray-600">Master your keyboard shortcuts with these flashcards</p>
+          <p className="text-lg text-gray-600 dark:text-gray-400">Master your keyboard shortcuts with these flashcards</p>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8">
@@ -238,14 +278,26 @@ function App() {
           />
 
           <div className="flex gap-3 w-full sm:w-auto">
-            <button onClick={handleShuffle} className="btn btn-primary flex-1 sm:flex-none">
+            <button onClick={handleShuffle} className="btn btn-primary dark:text-gray-900 flex-1 sm:flex-none">
               <Shuffle size={18} /> Shuffle
             </button>
-            <button onClick={toggleShowAnswers} className="btn btn-secondary flex-1 sm:flex-none">
+            <button onClick={toggleShowAnswers} className="btn btn-secondary dark:text-gray-900 flex-1 sm:flex-none">
               <BookOpen size={18} /> {showAnswer ? "Hide" : "Show"}
             </button>
-            <button onClick={togglePracticeMode} className="btn btn-neutral flex-1 sm:flex-none">
+            <button onClick={togglePracticeMode} className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none">
               <Keyboard size={18} /> {practiceMode ? "View" : "Practice"}
+            </button>
+            <button onClick={toggleDarkMode} className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none">
+              {darkMode ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5"/>
+                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              )}
             </button>
           </div>
         </div>
@@ -281,13 +333,13 @@ function App() {
         />
 
         <div className="flex gap-4 justify-center">
-          <button onClick={handleKnown} className="btn btn-success">
+          <button onClick={handleKnown} className="btn btn-success dark:text-gray-900">
             <Check size={20} /> I know this
           </button>
-          <button onClick={handleUnknown} className="btn btn-danger">
+          <button onClick={handleUnknown} className="btn btn-danger dark:text-gray-900">
             <X size={20} /> Still learning
           </button>
-          <button onClick={() => setKnownCards([])} className="btn btn-neutral">
+          <button onClick={() => setKnownCards([])} className="btn btn-neutral dark:text-gray-900">
             <RotateCcw size={20} /> Reset progress
           </button>
         </div>

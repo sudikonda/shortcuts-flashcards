@@ -23,7 +23,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           id="commandSet"
           value={selectedCommandSet}
           onChange={handleCommandSetChange}
-          className="select"
+          className="select bg-white dark:text-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
         >
           <option value="all">All Commands</option>
           <option value="idea">IdeaVim Commands</option>
@@ -31,7 +31,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           <option value="vim">Vim Commands</option>
           <option value="vimium">Vimium Commands</option>
         </select>
-        <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
+        <ChevronDown className="select-icon w-5 h-5 text-gray-400 dark:text-gray-500" />
       </div>
 
       <div className="select-container w-full sm:w-48">
@@ -39,14 +39,14 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           id="category"
           value={selectedCategory}
           onChange={handleCategoryChange}
-          className="select"
+          className="select bg-white dark:text-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
         >
           <option value="All">All Categories</option>
           {categories.map(category => (
             <option key={category} value={category}>{category}</option>
           ))}
         </select>
-        <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
+        <ChevronDown className="select-icon w-5 h-5 text-gray-400 dark:text-gray-500" />
       </div>
     </div>
   );

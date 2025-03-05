@@ -44,13 +44,13 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
     <div className="animate-fadeIn">
       <div className={`perspective-1000 mb-8 ${isCardKnown(currentCard.id) ? 'ring-2 ring-success rounded-2xl' : 'ring-2 ring-fuchsia-400 rounded-2xl'}`}>
         <div className={`relative transition-transform duration-500 transform-style-preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
-          <div className={`card ${flipped ? 'hidden' : ''}`} onClick={handleFlip}>
+          <div className={`card bg-white dark:bg-gray-800 shadow-lg dark:shadow-none ${flipped ? 'hidden' : ''}`} onClick={handleFlip}>
             <div className="card-header">{currentCard.parent}</div>
             <div className="card-subheading">{currentCard.category}</div>
 
             {practiceMode ? (
               <div className="flex flex-col items-center">
-                <h2 className="text-2xl font-bold text-center mb-6">What is the shortcut for:</h2>
+                <h2 className="text-2xl font-bold text-center mb-6 dark:text-white">What is the shortcut for:</h2>
                 <div className="bg-indigo-50 p-6 rounded-xl mb-8 w-full">
                   <p className="text-xl text-indigo-900 text-center">{currentCard.description}</p>
                 </div>
@@ -70,7 +70,7 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
                     <button
                       id="check-button"
                       onClick={checkAnswer}
-                      className="btn btn-primary whitespace-nowrap"
+                      className="btn btn-primary dark:text-gray-900 whitespace-nowrap"
                     >
                       Check
                     </button>
@@ -114,9 +114,9 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
               <div className="text-center">
                 <h2 className="text-2xl font-bold mb-4">{currentCard.command}</h2>
                 {showAnswer && (
-                  <p className="text-gray-600 italic">"{currentCard.description}"</p>
+                  <p className="text-gray-600 dark:text-gray-300 italic">"{currentCard.description}"</p>
                 )}
-                <p className="text-gray-500 text-sm mt-4">Click to flip</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mt-4">Click to flip</p>
               </div>
             )}
           </div>
@@ -126,10 +126,10 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
             <div className="card-subheading">{currentCard.parent}</div>
             <div className="text-center">
               <p className="text-xl mb-4">{currentCard.description}</p>
-              <div className="inline-block font-mono bg-gray-100 px-4 py-2 rounded-lg">
+              <div className="inline-block font-mono bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg">
                 {currentCard.command}
               </div>
-              <p className="text-gray-500 text-sm mt-4 flip-back-text">Click to flip back</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-4 flip-back-text">Click to flip back</p>
             </div>
           </div>
         </div>

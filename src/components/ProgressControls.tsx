@@ -24,14 +24,14 @@ const ProgressControls: React.FC<ProgressControlsProps> = ({
         <ChevronLeft size={20} /> Previous
       </button>
 
-      <span className="text-gray-600 font-medium">
+      <span className="text-gray-600 dark:text-gray-400 font-medium">
         {currentCardIndex + 1} of {filteredCardsLength}
       </span>
 
       <button
         onClick={handleNext}
         disabled={currentCardIndex === filteredCardsLength - 1}
-        className={`btn ${currentCardIndex === filteredCardsLength - 1 ? 'bg-gray-200 cursor-not-allowed' : 'btn-outline border-gray-200 text-gray-700'}`}
+        className={`btn ${currentCardIndex === filteredCardsLength - 1 ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed dark:text-white' : 'btn-outline border-gray-200 dark:border-gray-700 text-gray-700'}`}
       >
         Next <ChevronRight size={20} />
       </button>
