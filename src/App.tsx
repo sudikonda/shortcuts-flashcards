@@ -4,6 +4,7 @@ import { Shuffle, ChevronLeft, ChevronRight, RotateCcw, Check, X, BookOpen, Keyb
 import { ideaVimCommands } from './ideaVimCommands';
 import { leaderKeyCommands } from './leaderKeyCommands';
 import { vimCommands } from './vimCommands';
+import { vimiumCommands } from './vimiumCommands';
 
 export interface Flashcard {
   id: number;
@@ -24,7 +25,7 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
-  const [selectedCommandSet, setSelectedCommandSet] = useState<'idea' | 'leader' | 'vim'>('idea');
+  const [selectedCommandSet, setSelectedCommandSet] = useState<'idea' | 'leader' | 'vim' | 'vimium'>('idea');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -38,6 +39,9 @@ function App() {
         break;
       case 'vim':
         commands = vimCommands;
+        break;
+      case 'vimium':
+        commands = vimiumCommands;
         break;
       default:
         commands = ideaVimCommands;
@@ -111,7 +115,7 @@ function App() {
   };
 
   const handleCommandSetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCommandSet(e.target.value as 'idea' | 'leader');
+    setSelectedCommandSet(e.target.value as 'idea' | 'leader' | 'vim' | 'vimium');
   };
 
   const handleKnown = () => {
@@ -227,6 +231,7 @@ function App() {
                 <option value="idea">IdeaVim Commands</option>
                 <option value="leader">LeaderKey Commands</option>
                 <option value="vim">Vim Commands</option>
+                <option value="vimium">Vimium Commands</option>
               </select>
               <ChevronDown className="select-icon w-5 h-5 text-gray-400" />
             </div>
@@ -391,7 +396,7 @@ function App() {
           </div>
         )}
 
-<div className="text-center mt-12 text-sm text-gray-500">
+      <div className="text-center mt-12 text-sm text-gray-500">
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
       <footer className="footer">sudikonda</footer>
