@@ -10,10 +10,10 @@ const allCommands = [...ideaVimCommands, ...leaderKeyCommands, ...vimCommands, .
 
 export interface Flashcard {
   id: number;
+  parent: string;
   category: string;
   command: string;
-  description: string;
-  parent: string;
+  description: string; 
 }
 
 function App() {
