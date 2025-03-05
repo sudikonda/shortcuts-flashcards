@@ -343,7 +343,7 @@ function App() {
                   )}
                 </div>
 
-                <div className={`card absolute inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
+                <div className={`card relative w-full inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
                   <div className="card-header">{currentCard.category}</div>
                   <div className="text-center">
                     <p className="text-xl mb-4">{currentCard.description}</p>

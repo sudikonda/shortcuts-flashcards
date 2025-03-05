@@ -97,6 +97,15 @@ body {
   @apply border-danger bg-red-50;
 }
 
+.flip-back-text {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #555;
+  font-size: 0.8em;
+}
+
 .footer {
   position: fixed;
   left: 0;
