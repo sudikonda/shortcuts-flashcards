@@ -174,21 +174,21 @@ function App() {
       const button = document.querySelector('#check-button');
       if (button) {
         const rect = button.getBoundingClientRect();
-        const duration = 1000;
+        const duration = 100;
         const end = Date.now() + duration;
 
         (function frame() {
           confetti({
-            particleCount: 7,
+            particleCount: 5,
             angle: 60,
             spread: 55,
-            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }
+            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight },
           });
           confetti({
-            particleCount: 7,
+            particleCount: 5,
             angle: 120,
             spread: 55,
-            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight }
+            origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight },
           });
 
           if (Date.now() < end) {
@@ -334,6 +334,8 @@ function App() {
                             <p>Tip: For leader key, you can type "space" or " " (a space)</p>
                           ) : selectedCommandSet === 'leader' ? (
                             <p>Tip: Type the exact shortcut keys shown (e.g., "op" for Postman)</p>
+                          ) : selectedCommandSet === 'vimium' ? (
+                            <p>Tip: Type exact shortcut keys for command (e.g., "j" for Scroll down)</p>
                           ) : (
                             <p>Tip: Type the exact vim command (e.g., "i" for insert)</p>
                           )}
@@ -353,6 +355,7 @@ function App() {
 
                 <div className={`card relative w-full inset-0 rotate-y-180 ${!flipped ? 'hidden' : ''}`} onClick={handleFlip}>
                   <div className="card-header">{currentCard.category}</div>
+                  <div className="card-subheading">{currentCard.parent}</div>
                   <div className="text-center">
                     <p className="text-xl mb-4">{currentCard.description}</p>
                     <div className="inline-block font-mono bg-gray-100 px-4 py-2 rounded-lg">
