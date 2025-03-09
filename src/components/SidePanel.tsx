@@ -12,7 +12,7 @@ interface CommandItem {
 interface SidePanelProps {
   isOpen: boolean;
   commands: CommandItem[];
-  selectedCommandSet: 'all' | 'idea' | 'leader' | 'vim' | 'vimium';
+  selectedCommandSet: 'all' | 'ideavim' | 'leader' | 'vim' | 'vimium';
   onToggle: () => void;
 }
 

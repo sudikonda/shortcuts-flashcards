@@ -11,7 +11,7 @@ interface FlashcardDisplayProps {
   isCardKnown: (id: number) => boolean;
   userInput: string;
   isCorrect: boolean | null;
-  selectedCommandSet: 'all' | 'idea' | 'leader' | 'vim' | 'vimium';
+  selectedCommandSet: 'all' | 'ideavim' | 'leader' | 'vim' | 'vimium';
   handleFlip: () => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checkAnswer: () => void;
@@ -98,7 +98,7 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
                   )}
 
                   <div className="text-sm text-gray-500">
-                    {selectedCommandSet === 'idea' ? (
+                    {selectedCommandSet === 'ideavim' ? (
                       <p>Tip: For leader key, you can type "space" or " " (a space)</p>
                     ) : selectedCommandSet === 'leader' ? (
                       <p>Tip: Type the exact shortcut keys shown (e.g., "op" for Postman)</p>

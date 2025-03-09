@@ -166,7 +166,7 @@ function App() {
   };
 
   const handleCommandSetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCommandSet(e.target.value as 'idea' | 'leader' | 'vim' | 'vimium');
+    setSelectedCommandSet(e.target.value as 'ideavim' | 'leader' | 'vim' | 'vimium');
   };
 
   const handleKnown = () => {
