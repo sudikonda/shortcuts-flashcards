@@ -70,7 +70,7 @@ const FlashcardDisplay: React.FC<FlashcardDisplayProps> = ({
                     <button
                       id="check-button"
                       onClick={checkAnswer}
-                      className="btn btn-primary dark:text-gray-900 w-[25%] text-sm sm:text-base"
+                      className="btn btn-primary dark:text-gray-900 w-[25%] text-sm sm:text-base text-center"
                     >
                       Check
                     </button>
