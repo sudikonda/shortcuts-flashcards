@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SidePanel from './components/SidePanel';
 import CategorySelector from './components/CategorySelector';
 import FlashcardDisplay from './components/FlashcardDisplay';
 import ProgressControls from './components/ProgressControls';
@@ -54,7 +55,8 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [practiceMode, setPracticeMode] = useState(true);
-  const [selectedCommandSet, setSelectedCommandSet] = useState<'all' | 'idea' | 'leader' | 'vim' | 'vimium'>('all');
+  const [selectedCommandSet, setSelectedCommandSet] = useState<'all' | 'ideavim' | 'leader' | 'vim' | 'vimium'>('all');
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     const savedPreference = localStorage.getItem('darkMode');
     return savedPreference ? JSON.parse(savedPreference) : window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -80,7 +82,7 @@ function App() {
       case 'all':
         commands = allCommands;
         break;
-      case 'idea':
+      case 'ideavim':
         commands = ideaVimCommands;
         break;
       case 'leader':
@@ -258,7 +260,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className={`transition-all ${isPanelOpen ? 'pr-80' : 'pr-0'}`}>
+        <SidePanel 
+          isOpen={isPanelOpen} 
+          commands={allCommands} 
+          selectedCommandSet={selectedCommandSet}
+          onToggle={() => setIsPanelOpen(!isPanelOpen)}
+        />
+        <div className="flex flex-col items-center py-12 px-4">
       <div className="w-full max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3 flex items-center justify-center">
@@ -278,14 +288,38 @@ function App() {
           />
 
           <div className="flex gap-3 w-full sm:w-auto">
-            <button onClick={handleShuffle} className="btn btn-primary dark:text-gray-900 flex-1 sm:flex-none">
+            <button 
+              onClick={handleShuffle} 
+              className="btn btn-primary dark:text-gray-900 flex-1 sm:flex-none"
+              title="Shuffle flashcards"
+            >
               <Shuffle size={18} /> Shuffle
             </button>
-            <button onClick={toggleShowAnswers} className="btn btn-secondary dark:text-gray-900 flex-1 sm:flex-none">
+            <button 
+              onClick={toggleShowAnswers} 
+              className="btn btn-secondary dark:text-gray-900 flex-1 sm:flex-none"
+              title={`${showAnswer ? "Hide" : "Show"} answers`}
+            >
               <BookOpen size={18} /> {showAnswer ? "Hide" : "Show"}
             </button>
-            <button onClick={togglePracticeMode} className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none">
+            <button 
+              onClick={togglePracticeMode} 
+              className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none"
+              title={`Switch to ${practiceMode ? "View" : "Practice"} mode`}
+            >
               <Keyboard size={18} /> {practiceMode ? "View" : "Practice"}
+            </button>
+            <button 
+              onClick={() => setIsPanelOpen(!isPanelOpen)}
+              className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none"
+              title="Toggle Sidebar"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9h14V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-2H3V9z"></path>
+                <path d="M15 5v2"></path>
+                <path d="M15 11v2"></path>
+                <path d="M15 17v2"></path>
+              </svg>
             </button>
             <button onClick={toggleDarkMode} className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none">
               {darkMode ? (
@@ -349,6 +383,8 @@ function App() {
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
       <footer className="footer">sudikonda</footer>
+        </div>
+      </div>
     </div>
   );
 }

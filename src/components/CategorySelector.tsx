@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 
 interface CategorySelectorProps {
-  selectedCommandSet: 'all' | 'idea' | 'leader' | 'vim' | 'vimium';
+  selectedCommandSet: 'all' | 'ideavim' | 'leader' | 'vim' | 'vimium';
   selectedCategory: string;
   categories: string[];
   handleCommandSetChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -26,7 +26,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           className="select bg-white dark:text-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
         >
           <option value="all">All Commands</option>
-          <option value="idea">IdeaVim Commands</option>
+          <option value="ideavim">IdeaVim Commands</option>
           <option value="leader">LeaderKey Commands</option>
           <option value="vim">Vim Commands</option>
           <option value="vimium">Vimium Commands</option>
