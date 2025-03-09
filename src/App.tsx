@@ -268,17 +268,17 @@ function App() {
           selectedCommandSet={selectedCommandSet}
           onToggle={() => setIsPanelOpen(!isPanelOpen)}
         />
-        <div className="flex flex-col items-center py-12 px-4">
+        <div className="flex flex-col items-center py-4 sm:py-12 px-4">
       <div className="w-full max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3 flex items-center justify-center">
-            <Command className="w-10 h-10 mr-3 text-primary" />
+        <div className="text-center mb-4 sm:mb-12">
+          <h1 className="text-xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-3 flex items-center justify-center">
+            <Command className="w-5 h-5 sm:w-10 sm:h-10 mr-2 sm:mr-3 text-primary" />
             Command Shortcuts Flashcards
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">Master your keyboard shortcuts with these flashcards</p>
+          <p className="text-xs sm:text-lg text-gray-600 dark:text-gray-400">Master your keyboard shortcuts with these flashcards</p>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8">
+        <div className="flex flex-col gap-4 sm:flex-row justify-between items-center sm:gap-6 mb-6 sm:mb-8">
           <CategorySelector
             selectedCommandSet={selectedCommandSet}
             selectedCategory={selectedCategory}
@@ -287,34 +287,34 @@ function App() {
             handleCategoryChange={handleCategoryChange}
           />
 
-          <div className="flex gap-3 w-full sm:w-auto">
+          <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3 w-full">
             <button 
               onClick={handleShuffle} 
-              className="btn btn-primary dark:text-gray-900 flex-1 sm:flex-none"
+              className="btn btn-primary dark:text-gray-900 w-full"
               title="Shuffle flashcards"
             >
-              <Shuffle size={18} /> Shuffle
+              <Shuffle className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Shuffle</span>
             </button>
             <button 
               onClick={toggleShowAnswers} 
               className="btn btn-secondary dark:text-gray-900 flex-1 sm:flex-none"
               title={`${showAnswer ? "Hide" : "Show"} answers`}
             >
-              <BookOpen size={18} /> {showAnswer ? "Hide" : "Show"}
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">{showAnswer ? "Hide" : "Show"}</span>
             </button>
             <button 
               onClick={togglePracticeMode} 
               className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none"
               title={`Switch to ${practiceMode ? "View" : "Practice"} mode`}
             >
-              <Keyboard size={18} /> {practiceMode ? "View" : "Practice"}
+              <Keyboard className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">{practiceMode ? "View" : "Practice"}</span>
             </button>
             <button 
               onClick={() => setIsPanelOpen(!isPanelOpen)}
               className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none"
               title="Toggle Sidebar"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 9h14V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-2H3V9z"></path>
                 <path d="M15 5v2"></path>
                 <path d="M15 11v2"></path>
@@ -323,12 +323,12 @@ function App() {
             </button>
             <button onClick={toggleDarkMode} className="btn btn-neutral dark:text-gray-900 flex-1 sm:flex-none">
               {darkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="5"/>
                   <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
               )}
@@ -366,23 +366,23 @@ function App() {
           handleNext={handleNext}
         />
 
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center w-full sm:w-auto">
           <button onClick={handleKnown} className="btn btn-success dark:text-gray-900">
-            <Check size={20} /> I know this
+            <Check className="w-4 h-4 sm:w-5 sm:h-5" /> <span>I know this</span>
           </button>
           <button onClick={handleUnknown} className="btn btn-danger dark:text-gray-900">
-            <X size={20} /> Still learning
+            <X className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Still learning</span>
           </button>
           <button onClick={() => setKnownCards([])} className="btn btn-neutral dark:text-gray-900">
-            <RotateCcw size={20} /> Reset progress
+            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Reset progress</span>
           </button>
         </div>
       </div>
 
-      <div className="text-center mt-12 text-sm text-gray-500">
+          <div className="text-center mt-4 sm:mt-12 text-xs text-gray-500">
         <p>Total commands: {flashcards.length} | Known: {knownCards.length}</p>
       </div>
-      <footer className="footer">sudikonda</footer>
+      <footer className="footer text-xs py-1">sudikonda</footer>
         </div>
       </div>
     </div>
