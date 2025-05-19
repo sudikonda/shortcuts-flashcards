@@ -1,0 +1,204 @@
+{
+  "actions" : [
+    {
+      "key" : "t",
+      "type" : "application",
+      "value" : "/System/Applications/Utilities/Terminal.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "s",
+          "type" : "application",
+          "value" : "/System/Applications/System Settings.app"
+        },
+        {
+          "key" : "e",
+          "type" : "application",
+          "value" : "/System/Applications/Mail.app"
+        },
+        {
+          "key" : "m",
+          "type" : "application",
+          "value" : "/System/Applications/Music.app"
+        },
+        {
+          "key" : "f",
+          "type" : "application",
+          "value" : "/Applications/Firefox Developer Edition.app"
+        },
+        {
+          "key" : "n",
+          "type" : "application",
+          "value" : "/System/Applications/Notes.app"
+        },
+        {
+          "key" : "w",
+          "type" : "application",
+          "value" : "/Applications/Webex.app"
+        },
+        {
+          "key" : "z",
+          "type" : "application",
+          "value" : "/Applications/Zed.app"
+        },
+        {
+          "key" : "v",
+          "type" : "application",
+          "value" : "/Applications/Vivaldi.app"
+        },
+        {
+          "key" : "p",
+          "type" : "application",
+          "value" : "/Applications/Postman.app"
+        },
+        {
+          "key" : "b",
+          "type" : "application",
+          "value" : "/Applications/Brave Browser.app"
+        }
+      ],
+      "key" : "o",
+      "label" : "Applications",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "e",
+          "label" : "Emoji",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
+        },
+        {
+          "key" : "p",
+          "label" : "Confetti",
+          "type" : "url",
+          "value" : "raycast://confetti"
+        },
+        {
+          "key" : "c",
+          "label" : "Camera",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/system/open-camera"
+        },
+        {
+          "key" : "l",
+          "label" : "Logs",
+          "type" : "url",
+          "value" : "raycast://extensions/scottaglia/cyberduck/index"
+        },
+        {
+          "key" : "d",
+          "label" : "Dictionary",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/dictionary/define-word"
+        },
+        {
+          "key" : "u",
+          "label" : "Snippets",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/snippets/search-snippets"
+        }
+      ],
+      "key" : "r",
+      "label" : "Raycast",
+      "type" : "group"
+    },
+    {
+      "key" : "i",
+      "type" : "application",
+      "value" : "/Users/sudikonda/Applications/IntelliJ IDEA Ultimate.app"
+    },
+    {
+      "key" : "v",
+      "type" : "application",
+      "value" : "/Applications/Vivaldi.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "d",
+          "type" : "folder",
+          "value" : "/Users/sudikonda/Downloads"
+        },
+        {
+          "key" : "h",
+          "type" : "folder",
+          "value" : "/Users/sudikonda"
+        },
+        {
+          "key" : "c",
+          "type" : "folder",
+          "value" : "/Users/sudikonda/Developer"
+        },
+        {
+          "key" : "w",
+          "type" : "folder",
+          "value" : "/Users/sudikonda/Developer"
+        },
+        {
+          "key" : "a",
+          "type" : "application",
+          "value" : "/Applications"
+        }
+      ],
+      "key" : "f",
+      "label" : "Finder",
+      "type" : "group"
+    },
+    {
+      "key" : ";",
+      "type" : "application",
+      "value" : "/Applications/WhatsApp.app"
+    },
+    {
+      "key" : "b",
+      "type" : "application",
+      "value" : "/Applications/Brave Browser.app"
+    },
+    {
+      "key" : "c",
+      "type" : "application",
+      "value" : "/Applications/Visual Studio Code.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "l",
+          "label" : "Left Display",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/next-display"
+        },
+        {
+          "key" : "r",
+          "label" : "Right Display",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/previous-display"
+        },
+        {
+          "key" : "m",
+          "label" : "Maximize",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/maximize"
+        },
+        {
+          "key" : "c",
+          "label" : "Center Minimize",
+          "type" : "url",
+          "value" : "raycast://customWindowManagementCommand?&name=Smaller%20Center&position=center&relativeWidth=0.5&relativeHeight=0.5"
+        }
+      ],
+      "key" : "w",
+      "label" : "Window Management",
+      "type" : "group"
+    },
+    {
+      "key" : "h",
+      "label" : "Clipboard History",
+      "type" : "url",
+      "value" : "raycast://extensions/raycast/clipboard-history/clipboard-history"
+    }
+  ],
+  "type" : "group"
+}

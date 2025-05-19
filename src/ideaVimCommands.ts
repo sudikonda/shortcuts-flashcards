@@ -13,28 +13,34 @@ const ideaVimCommands: Flashcard[] = [
   { id: 5, parent: "IdeaVim", category: "Debug", command: "<leader>ds", description: "Stop debugging" },
   { id: 6, parent: "IdeaVim", category: "Debug", command: "<leader>db", description: "Toggle line breakpoint" },
   { id: 7, parent: "IdeaVim", category: "Debug", command: "<leader>do", description: "Step over" },
+  { id: 37, parent: "IdeaVim", category: "Debug", command: "<leader>dv", description: "View breakpoint" },
   
   // Code
   { id: 8, parent: "IdeaVim", category: "Code", command: "<leader>rn", description: "Rename element" },
   { id: 9, parent: "IdeaVim", category: "Code", command: "<leader>z", description: "Toggle distraction free mode" },
   { id: 10, parent: "IdeaVim", category: "Code", command: "<leader>oi", description: "Optimize imports" },
-  { id: 11, parent: "IdeaVim", category: "Code", command: "<leader>rf", description: "Reformat code" },
+  { id: 11, parent: "IdeaVim", category: "Code", command: "<leader>ff", description: "Reformat code" },
   { id: 12, parent: "IdeaVim", category: "Code", command: "<leader>fs", description: "File structure popup" },
+  { id: 38, parent: "IdeaVim", category: "Code", command: "<leader>frc", description: "File Recompile" },
   
   // Project
   { id: 13, parent: "IdeaVim", category: "Project", command: "<leader>pv", description: "Select in project view" },
   
   // Git
-  { id: 14, parent: "IdeaVim", category: "Git", command: "<leader>h", description: "Show tabbed file history" },
-  { id: 15, parent: "IdeaVim", category: "Git", command: "<leader>a", description: "Annotate" },
+  { id: 14, parent: "IdeaVim", category: "Git", command: "<leader>gh", description: "Show tabbed file history" },
+  { id: 15, parent: "IdeaVim", category: "Git", command: "<leader>ga", description: "Annotate" },
   { id: 16, parent: "IdeaVim", category: "Git", command: "<leader>cm", description: "Copilot git commit" },
+  { id: 39, parent: "IdeaVim", category: "Git", command: "<leader>gcp", description: "Git Commit and Push" },
+  { id: 40, parent: "IdeaVim", category: "Git", command: "<leader>gc", description: "Git Checkin project" },
+  { id: 41, parent: "IdeaVim", category: "Git", command: "<leader>gp", description: "Git Push" },
   
   // Search
-  { id: 17, parent: "IdeaVim", category: "Search", command: "<leader>sc", description: "Go to class" },
-  { id: 18, parent: "IdeaVim", category: "Search", command: "<leader>sa", description: "Go to action" },
-  { id: 19, parent: "IdeaVim", category: "Search", command: "<leader>sf", description: "Go to file" },
-  { id: 20, parent: "IdeaVim", category: "Search", command: "<leader>gd", description: "Go to declaration" },
-  { id: 21, parent: "IdeaVim", category: "Search", command: "<leader>ge", description: "Go to next error" },
+  { id: 17, parent: "IdeaVim", category: "Search", command: "<leader>gtc", description: "Go to class" },
+  { id: 18, parent: "IdeaVim", category: "Search", command: "<leader>gta", description: "Go to action" },
+  { id: 19, parent: "IdeaVim", category: "Search", command: "<leader>gtf", description: "Go to file" },
+  { id: 20, parent: "IdeaVim", category: "Search", command: "<leader>gtd", description: "Go to declaration" },
+  { id: 42, parent: "IdeaVim", category: "Search", command: "<leader>gti", description: "Go to implementation" },
+  { id: 21, parent: "IdeaVim", category: "Search", command: "<leader>gte", description: "Go to next error" },
   
   // Window
   { id: 22, parent: "IdeaVim", category: "Window", command: "<leader>hw", description: "Hide active window" },

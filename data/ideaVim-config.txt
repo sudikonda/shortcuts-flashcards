@@ -1,0 +1,121 @@
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+set exchange
+" Trying the new syntax
+Plug 'machakann/vim-highlightedyank'
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+" <C-n> seems to me as a better solution than <M-n>,
+" but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now
+map <C-n> <Plug>NextWholeOccurrence
+
+""" Common settings -------------------------
+set showmode
+set so=5
+set nu
+set cursorline
+set showmatch
+
+" Search
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+
+""" My Mappings -----------------------------
+" easy-motion-s -> Search backward
+" easy-motion-f -> Search forward
+map <leader>e <Plug>(easymotion-s)
+"map <leader>f <Plug>(easymotion-f)
+
+" Debug
+map <leader>dd <Action>(Debug)
+map <leader>ds <Action>(Stop)
+map <leader>db <Action>(ToggleLineBreakpoint)
+map <leader>do <Action>(StepOver)
+map <leader>dv <Action>(ViewBreakpoints)
+
+" Run
+map <leader>rr <Action>(Rerun)
+map <leader>re <Action>(Resume)
+map <leader>rs <Action>(Stop)
+
+" Code
+map <leader>rn <Action>(RenameElement)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>oi <Action>(OptimizeImports)
+map <leader>ff <Action>(ReformatCode)
+map <leader>fs <Action>(FileStructurePopup)
+map <leader>frc <Action>(CompileFile)
+
+" Project
+map <leader>pv <Action>(SelectInProjectView)
+
+" Git
+map <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>ga <Action>(Annotate)
+map <leader>cm <Action>(copilot.git.commit.button)
+map <leader>gcp <Action>(Git.Commit.And.Push.Executor)
+map <leader>gc <Action>(CheckinProject)
+map <leader>gp <Action>(Vcs.Push)
+
+
+" Search
+map <leader>gtc <Action>(GotoClass)
+map <leader>gta <Action>(GotoAction)
+map <leader>gtf <Action>(GotoFile)
+map <leader>gtd <Action>(GotoDeclaration)
+map <leader>gti <Action>(GotoImplementation)
+map <leader>gte <Action>(GotoNextError)
+
+" Window
+map <leader>hw <Action>(HideActiveWindow)
+map <leader>hx <Action>(HideAllWindows)
+map <leader>xx <Action>(CloseEditor)
+map <leader>xa <Action>(CloseAllEditorsButActive)
+map <leader>wv <Action>(SplitVertically)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+" Project Window
+map <leader>ww <Action>(NextProjectWindow)
+map <leader>WW <Action>(PreviousProjectWindow)
+
+
+" Navigation
+map <leader><< <Action>(Back)
+map <leader>>> <Action>(Forward)
+map <leader>r <Action>(RecentFiles)
+map <leader>fr <Action>(ReplaceInPath)
+
+" Terminal
+map <leader>t <Action>(ActivateTerminalToolWindow)
+map gc <Action>(ActivateGitHubCopilotChatToolWindow)
+
+
+
+
+" Just makes me nervous
+map H h
+
+" Toggle case and start typing. E.g. `<leader>iget`: `property` -> `getProperty`
+map <leader>i ~hi
+" Remove selection and toggle case. E.g. `v2l<leader>u`: `getProperty` -> `property`
+vmap <leader>u d~h
+
+" I think it's a better solution
+map U <C-R>
